@@ -23,6 +23,20 @@
             <select class="form-control" id="layanan" name="layanan" required></select>
         </div>
         <div class="col-12">
+    <label for="berat_barang" class="form-label">Berat Barang (kg)</label>
+    <input type="number" class="form-control" id="berat_barang" name="berat_barang" min="1" value="1" required>
+    </div>
+
+    <div class="col-12">
+    <label for="jenis_pengiriman" class="form-label">Jenis Pengiriman</label>
+    <select class="form-control" id="jenis_pengiriman" name="jenis_pengiriman" required>
+        <option value="reguler">Reguler</option>
+        <option value="express">Express</option>
+        <option value="cargo">Kargo</option>
+    </select>
+    </div>
+
+        <div class="col-12">
             <label for="ongkir" class="form-label">Ongkir</label>
             <input type="text" class="form-control" id="ongkir" name="ongkir" readonly>
         </div>
@@ -114,6 +128,10 @@ $(document).ready(function() {
     var id_kelurahan = $(this).val(); 
     $("#layanan").empty();
     ongkir = 0;
+
+        $("#berat_barang, #jenis_pengiriman").on('change', function() {
+    $("#kelurahan").trigger('change');
+});
 
     $.ajax({
         url: "<?= site_url('get-cost') ?>",
